@@ -22,3 +22,4 @@ This tool will pull status objects from the public timeline, parse the objects a
 - Create a simple method to parse a small amount of public tags and calculate the totals for each tag used. 
 - Check API limits for the above outlined approach. (Found on 2/27/23: [300 calls per 5 minutes per IP address or account](https://docs.joinmastodon.org/api/rate-limits/#per-ip))
 - Mock up a public web page for the tag data.
+- Reach out to Eugen and see if there's some private API / feature to accomplish the scope of this proposal.
