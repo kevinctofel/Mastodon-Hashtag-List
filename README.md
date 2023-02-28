@@ -23,3 +23,6 @@ This tool will pull status objects from the public timeline, parse the objects a
 - Check API limits for the above outlined approach. (Found on 2/27/23: [300 calls per 5 minutes per IP address or account](https://docs.joinmastodon.org/api/rate-limits/#per-ip))
 - Mock up a public web page for the tag data.
 - Reach out to Eugen and see if there's some private API / feature to accomplish the scope of this proposal.
+
+# Updates
+- 2/27/2023 -- Basic NodeJS functionality as POC. Pull the latest 20 statuses and show the first tag (if any) in any statuses using a hashtag. 
