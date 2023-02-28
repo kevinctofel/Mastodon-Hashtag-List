@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+
+<head></head>
+
+<body>
+  <script>
+  const api_url = 
+      "https://localhost/getTimeline.js";
+  async function funcName(api_url) {
+      const response = await fetch(api_url);
+      var data = await response.json();
+    }</script>
+  <div id="statuses"></div>
+  <script>document.getElementById("statuses").innerHTML = data</script>
+</body>

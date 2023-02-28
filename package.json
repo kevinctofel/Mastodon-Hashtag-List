@@ -1,0 +1,22 @@
+{
+  "name": "mastodon-hashtag-list",
+  "version": "1.0.0",
+  "description": "Mastodon popular hashtag list tool ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinctofel/Mastodon-Hashtag-List.git"
+  },
+  "keywords": [
+    "Mastodon"
+  ],
+  "author": "Kevin C. Tofel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kevinctofel/Mastodon-Hashtag-List/issues"
+  },
+  "homepage": "https://github.com/kevinctofel/Mastodon-Hashtag-List#readme"
+}
