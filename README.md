@@ -26,3 +26,6 @@ This tool will pull status objects from the public timeline, parse the objects a
 
 # Updates
 - 2/27/2023 -- Basic NodeJS functionality as POC. Pull the latest 20 statuses and show the first tag (if any) in any statuses using a hashtag. 
+
+- 3/21/2023 -- Revamped the POC to get a stream of Mastodon status and output them to the console. 
+![mastodon stream](https://user-images.githubusercontent.com/16373212/226764666-b934175a-d626-4e17-a04f-60a8989b0fea.png)
