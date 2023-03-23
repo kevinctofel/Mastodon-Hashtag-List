@@ -1,27 +1,18 @@
-const http = require('http');
-const hostname = '127.0.0.1';
-const port = 3000;
-const Mastodon = require('mastodon-api');
-const server = http.createServer(async (req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-});
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
-});
-
 require('dotenv').config();
-
+const Mastodon = require('mastodon-api');
 const mastoStream = new Mastodon({
   access_token: process.env.AUTH_TOKEN,
-  api_url: 'https://hachyderm.io/api/v1/', 
-})
+  api_url: 'https://hachyderm.io/api/v1/',
+});
+const datastore = require('nedb');
+const db = new datastore('database.db'); 
+db.loadDatabase();
 
-const listener = mastoStream.stream('streaming/public/local')
+const listener = mastoStream.stream('streaming/public/local');
 
 listener.on('message', msg => {
-  console.log(msg.data.content);
-  return(msg.data.content);
+  console.log(msg.data.content); 
+  db.insert({status: msg.data.content});
   // write `${msg.data.content}` to a web page);
 })
 
