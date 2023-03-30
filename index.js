@@ -14,7 +14,7 @@ const mastoStream = new Mastodon({
   api_url: 'https://hachyderm.io/api/v1/',
 });
 const datastore = require('nedb');
-const db = new datastore('./database.db'); 
+const db = new datastore('./database.db');
 db.loadDatabase();
 
 // function readChunks(reader) {
@@ -33,20 +33,35 @@ db.loadDatabase();
 const listener = mastoStream.stream('streaming/public/local');
 
 app.get('/', function (req, res) {
-  
-listener.on('message', msg => {
-  console.log(msg.data.content); 
-  db.insert({status: msg.data.content}); // write to a local db file
-  res.write(msg.data.content);
-  // msg.render('../index', Document.getElementById('statuses').appendChild(msg.data.content));
-  // const reader = response.body.getReader();
-  // for (const chunk of readChunks(msg)) {
-  //     console.log(`received chunk of size ${chunk.length}`);
-  // write `${msg.data.content}` to a web page);
-});
+
+  listener.on('message', msg => {
+
+    if (msg.data.tags.length > 0) {
+      
+        console.log(msg.event, msg.data.tags);
+        db.insert(msg.data.tags);
+      // };
+
+      // for (const tag in msg.data.tags) {
+      //   console.log(tag, tag['name']);
+      //   db.insert(tag);
+      // res.write(tag['name']) // write to HTML?
+    }
+  })
+})
+
+// console.log(msg.data.tags); 
+// db.insert({status: msg.data.content}); // write to a local db file
+// res.write(msg.data.tags)
+// msg.render('../index', Document.getElementById('statuses').appendChild(msg.data.content));
+// const reader = response.body.getReader();
+// for (const chunk of readChunks(msg)) {
+//     console.log(`received chunk of size ${chunk.length}`);
+// write `${msg.data.content}` to a web page);
+// }});
 
 listener.on('error', err => console.log(err));
-});
+
 
 // app.use(express.static('public'));
 // app.use(express.json());
