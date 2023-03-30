@@ -30,8 +30,13 @@ This tool will pull status objects from the public timeline, parse the objects a
 - 3/21/2023 -- Revamped the POC to get a stream of Mastodon status and output them to the console. 
 ![mastodon stream](https://user-images.githubusercontent.com/16373212/226764666-b934175a-d626-4e17-a04f-60a8989b0fea.png)
 
-- 3/23/2032 -- Added real time status messagea to a web page. Video below; first 16 seconds is waiting for someone to post a status.
+- 3/23/2032 -- Added real time status messages to a web page. Video below; first 16 seconds is waiting for someone to post a status.
 
 https://user-images.githubusercontent.com/16373212/227327582-b4ee6f20-f178-43eb-8cb5-995ff111efff.mp4
+
+- 3/30/2023 -- Now parsing the stream to get hashtags only. Storing them in a flat file with the intention of storing in a database. Not yet passing this data to a web page.
+
+![Screenshot from 2023-03-30 10-41-38](https://user-images.githubusercontent.com/16373212/228873963-d34e8f11-18c1-4d66-88ba-16ea65bb8cd7.jpg)
+
 
 
