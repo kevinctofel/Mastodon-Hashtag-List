@@ -3,10 +3,6 @@ const app = express();
 
 app.listen(3000, () => console.log('Listening at port 3000'));
 
-// app.get('/', (req, res) => {
-//   res.send('Hachyderm.io status stream'
-// )});
-
 require('dotenv').config();
 const Mastodon = require('mastodon-api');
 const mastoStream = new Mastodon({
@@ -17,37 +13,18 @@ const datastore = require('nedb');
 const db = new datastore('./database.db');
 db.loadDatabase();
 
-// function readChunks(reader) {
-//   return {
-//       async* [Symbol.asyncIterator]() {
-//           let readResult = await reader.read();
-//           while (!readResult.done) {
-//               yield readResult.value;
-//               readResult = await reader.read();
-//           }
-//       },
-//   };
-// }
-
-
-const listener = mastoStream.stream('streaming/public/local');
+const listener = mastoStream.stream('streaming/public');
 
 app.get('/', function (req, res) {
 
   listener.on('message', msg => {
 
-    if (msg.data.tags.length > 0) {
+    if (msg.event === 'update' && msg.data.tags !== []) {
       
-        console.log(msg.event, msg.data.tags);
+        console.log(msg.event, msg.data.uri, typeof msg.data.tags, msg.data.tags);
         db.insert(msg.data.tags);
-      // };
-
-      // for (const tag in msg.data.tags) {
-      //   console.log(tag, tag['name']);
-      //   db.insert(tag);
-      // res.write(tag['name']) // write to HTML?
-    }
-  })
+    
+  }})
 })
 
 // console.log(msg.data.tags); 
@@ -63,16 +40,3 @@ app.get('/', function (req, res) {
 listener.on('error', err => console.log(err));
 
 
-// app.use(express.static('public'));
-// app.use(express.json());
-
-// app.get('/status', (req, res) => {
-//   // res.json({test: 123});
-//   db.find({}, function (err, data) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//     res.data;
-//     }
-//   });
-// });
