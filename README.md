@@ -2,7 +2,7 @@
 A tool to determine the most used hashtags on a Mastodon instance
 
 # Purpose
-New Mastadon users must choose a server with little more information than a general description. To assist new users, a web page showing the top x# of recently used hashtags would provide more information. 
+New Mastadon users must choose a server with little more information than a general description. To assist new users, a web page showing the top x# of recently used hashtags on an instance would provide more information. 
 
 # High level concept
 Using the Mastodon API, you can [programmatically retreive the public timeline](https://docs.joinmastodon.org/client/public/#timelines) for a single Mastodon instance. The timeline is an ordered list of statuses, which may or may not included one or more hashtags. 
