@@ -38,5 +38,7 @@ https://user-images.githubusercontent.com/16373212/227327582-b4ee6f20-f178-43eb-
 
 ![Screenshot from 2023-03-30 10-41-38](https://user-images.githubusercontent.com/16373212/228873963-d34e8f11-18c1-4d66-88ba-16ea65bb8cd7.jpg)
 
+- 4/1/2023 -- Added data validation so the code seems to be running more stable. Ran for 30 minutes and logged about 1,900 hashtags into the database.db file. 
 
+![Mastodon hashtags](https://user-images.githubusercontent.com/16373212/229327439-0aab998a-cd7a-433f-8294-46f7442be1ac.jpeg)
 
