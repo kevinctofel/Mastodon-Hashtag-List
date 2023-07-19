@@ -1,26 +1,21 @@
-require('dotenv').config();
-const Mastodon = require('mastodon-api');
+require("dotenv").config();
+const Mastodon = require("mastodon-api");
 const mastoStream = new Mastodon({
   access_token: process.env.AUTH_TOKEN,
-  api_url: 'https://hachyderm.io/api/v1/',
+  api_url: "https://hachyderm.io/api/v1/",
 });
-const datastore = require('nedb');
-const db = new datastore('database.db'); 
+const datastore = require("nedb");
+const db = new datastore("database.db");
 db.loadDatabase();
 
-const listener = mastoStream.stream('streaming/public/local');
+const listener = mastoStream.stream("streaming/public/local");
 
-listener.on('message', msg => {
-  console.log(msg.data.content); 
-  db.insert({status: msg.data.content});
-  // write `${msg.data.content}` to a web page);
-})
+listener.on("message", (msg) => {
+  console.log(msg.data.content);
+  db.insert({ status: msg.data.content });
+});
 
-listener.on('error', err => console.log(err))
-
-
-
-
+listener.on("error", (err) => console.log(err));
 
 //   try {
 //     const tagList = await getTags();
@@ -33,8 +28,6 @@ listener.on('error', err => console.log(err))
 //   // res.end(JSON.stringify(tagList));
 //   res.end('All done!')
 // });
-
-
 
 // const getTimeline = async () => {
 
@@ -66,6 +59,3 @@ listener.on('error', err => console.log(err))
 //   console.log(tagList);
 //   return tagList;
 // }
-
-
-

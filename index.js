@@ -1,42 +1,41 @@
-const express = require('express');
+const express = require("express");
 const app = express();
+let statuses;
+let tags = [];
+const { Transform } = require("stream");
 
-app.listen(3000, () => console.log('Listening at port 3000'));
+app.listen(3001, () => console.log("Listening at port 3001"));
 
-require('dotenv').config();
-const Mastodon = require('mastodon-api');
+require("dotenv").config();
+const Mastodon = require("mastodon-api");
 const mastoStream = new Mastodon({
   access_token: process.env.AUTH_TOKEN,
-  api_url: 'https://hachyderm.io/api/v1/',
+  api_url: "https://hachyderm.io/api/v1/",
 });
-const datastore = require('nedb');
-const db = new datastore('./database.db');
+const datastore = require("nedb");
+const db = new datastore("./database.db");
 db.loadDatabase();
 
-const listener = mastoStream.stream('streaming/public');
+const listener = mastoStream.stream("streaming/public");
 
-app.get('/', function (req, res) {
+app.get("/", function (req, res) {
+  listener.on("message", (msg) => {
+    if (msg.event === "update" && msg.data.tags !== []) {
+      console.log(msg.event, msg.data.uri, msg.data.tags);
+      // if (msg.data.tags.length > 1) {
+      //   msg.data.tags = msg.data.tags.flat();
+      // }
+      db.insert(msg.data.tags);
 
-  listener.on('message', msg => {
+      // statuses += msg.data.tags;
+      // // console.log(statuses);
+      // db.insert(msg.data.tags);
+      // db.insert(",");
+      // tags.push(JSON.stringify(msg.data.tags));
+    }
 
-    if (msg.event === 'update' && msg.data.tags !== []) {
-      
-        console.log(msg.event, msg.data.uri, typeof msg.data.tags, msg.data.tags);
-        db.insert(msg.data.tags);
-    
-  }})
-})
+    // console.log(tags);
+  });
+});
 
-// console.log(msg.data.tags); 
-// db.insert({status: msg.data.content}); // write to a local db file
-// res.write(msg.data.tags)
-// msg.render('../index', Document.getElementById('statuses').appendChild(msg.data.content));
-// const reader = response.body.getReader();
-// for (const chunk of readChunks(msg)) {
-//     console.log(`received chunk of size ${chunk.length}`);
-// write `${msg.data.content}` to a web page);
-// }});
-
-listener.on('error', err => console.log(err));
-
-
+listener.on("error", (err) => console.log(err));
